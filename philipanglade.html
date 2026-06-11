@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Philip Anglade — Systems Builder</title>
+<meta name="description" content="Program and operations leader. I turn ambiguous ideas into functioning platforms, operations, and teams." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1A2F;
+    --navy-2:#0E2440;
+    --paper:#F5F1E7;
+    --paper-soft:#EDE7D8;
+    --ink:#13283F;
+    --gold:#C6992E;
+    --gold-soft:#D9B45A;
+    --muted:#5C6B7A;
+    --line:rgba(198,153,46,.32);
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--navy);color:var(--paper);
+    font-family:"Inter",system-ui,sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.05;margin:0}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit}
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--gold-soft)
+  }
+
+  /* ---- top bar ---- */
+  header.nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(8px);
+    background:rgba(10,26,47,.78);border-bottom:1px solid rgba(198,153,46,.16)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brandmark{font-family:"Fraunces",serif;font-size:1.05rem;letter-spacing:.02em}
+  .brandmark b{color:var(--gold-soft);font-weight:600}
+  .navlinks{display:flex;gap:26px;font-size:.85rem;color:#B9C4D0}
+  .navlinks a{text-decoration:none;transition:color .2s}
+  .navlinks a:hover{color:var(--gold-soft)}
+  @media(max-width:720px){.navlinks{display:none}}
+
+  /* ---- hero ---- */
+  .hero{position:relative;padding:96px 0 72px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 80% at 80% -10%,rgba(198,153,46,.14),transparent 55%);
+    pointer-events:none}
+  .tag{display:inline-flex;align-items:center;gap:12px;margin-bottom:26px}
+  .tag .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.6rem);letter-spacing:-.01em}
+  .hero h1 .accent{font-style:italic;color:var(--gold-soft)}
+  .hero p.lede{max-width:620px;margin:26px 0 0;color:#CBD4DD;font-size:1.12rem}
+  .chip{display:inline-block;margin-top:30px;padding:8px 18px;border:1px solid var(--line);
+    border-radius:999px;font-family:"JetBrains Mono",monospace;font-size:.78rem;
+    letter-spacing:.22em;color:var(--gold-soft);text-transform:uppercase}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .btn{display:inline-block;padding:13px 24px;border-radius:7px;text-decoration:none;
+    font-size:.92rem;font-weight:500;transition:transform .15s,background .2s,border-color .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:var(--gold);color:var(--navy);font-weight:600}
+  .btn.primary:hover{background:var(--gold-soft)}
+  .btn.ghost{border:1px solid var(--line);color:var(--paper)}
+  .btn.ghost:hover{border-color:var(--gold-soft)}
+
+  /* ---- throughline strip ---- */
+  .strip{border-top:1px solid rgba(198,153,46,.16);border-bottom:1px solid rgba(198,153,46,.16);
+    background:var(--navy-2)}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .strip .cell{padding:30px 22px;border-right:1px solid rgba(198,153,46,.12)}
+  .strip .cell:last-child{border-right:none}
+  .strip .verb{font-family:"Fraunces",serif;font-size:1.35rem;color:var(--gold-soft)}
+  .strip .who{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.18em;
+    text-transform:uppercase;color:#8A98A6;margin-top:8px}
+  .strip .what{font-size:.9rem;color:#C3CDD7;margin-top:10px}
+  @media(max-width:720px){.strip .wrap{grid-template-columns:repeat(2,1fr)}
+    .strip .cell:nth-child(2){border-right:none}}
+
+  /* ---- sections ---- */
+  section{padding:84px 0}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:46px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+  .sec-head .num{font-family:"JetBrains Mono",monospace;color:var(--gold);font-size:.9rem;
+    padding-top:6px}
+  .sec-sub{color:var(--muted);max-width:560px}
+
+  /* ---- ventures ---- */
+  .ventures{display:grid;gap:22px}
+  .vcard{background:var(--navy-2);border:1px solid rgba(198,153,46,.16);border-radius:12px;
+    padding:34px 32px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
+  .vcard:hover{border-color:var(--line);transform:translateY(-3px)}
+  .vcard .vtop{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+  .vcard h3{font-size:1.7rem}
+  .vcard .role{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--gold-soft);margin-top:6px}
+  .reframe{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:26px 0 20px;
+    border:1px solid rgba(198,153,46,.16);border-radius:9px;overflow:hidden}
+  .reframe .col{padding:18px 20px}
+  .reframe .col.see{background:rgba(255,255,255,.02);border-right:1px solid rgba(198,153,46,.14)}
+  .reframe .lbl{font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.16em;
+    text-transform:uppercase;color:#8A98A6;margin-bottom:8px}
+  .reframe .see .txt{color:#9FAAB6}
+  .reframe .built .lbl{color:var(--gold-soft)}
+  .reframe .built .txt{color:var(--paper)}
+  @media(max-width:620px){.reframe{grid-template-columns:1fr}
+    .reframe .col.see{border-right:none;border-bottom:1px solid rgba(198,153,46,.14)}}
+  .metrics{display:flex;flex-wrap:wrap;gap:10px}
+  .metric{font-family:"JetBrains Mono",monospace;font-size:.74rem;color:#C3CDD7;
+    border:1px solid rgba(198,153,46,.2);border-radius:6px;padding:6px 11px}
+  .metric b{color:var(--gold-soft);font-weight:500}
+
+  /* ---- credentials ---- */
+  .creds{background:var(--paper);color:var(--ink)}
+  .creds .wrap{display:flex;align-items:center;gap:34px;flex-wrap:wrap;justify-content:space-between}
+  .creds .label{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.2em;
+    text-transform:uppercase;color:#9C7A1E}
+  .creds .items{display:flex;gap:30px;flex-wrap:wrap}
+  .creds .item{display:flex;flex-direction:column}
+  .creds .item .k{font-family:"Fraunces",serif;font-size:1.15rem;color:var(--ink)}
+  .creds .item .s{font-size:.78rem;color:#6A7686}
+
+  /* ---- lifecycle ---- */
+  .lifecycle{background:var(--navy-2);border-top:1px solid rgba(198,153,46,.16);
+    border-bottom:1px solid rgba(198,153,46,.16)}
+  .steps{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+  .step-btn{flex:1;min-width:120px;background:transparent;border:1px solid rgba(198,153,46,.2);
+    border-radius:8px;padding:14px 12px;cursor:pointer;text-align:left;color:#C3CDD7;
+    transition:all .2s;font-family:inherit}
+  .step-btn:hover{border-color:var(--line)}
+  .step-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+  .step-btn .sn{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.1em;display:block}
+  .step-btn .st{font-family:"Fraunces",serif;font-size:1.05rem;margin-top:5px}
+  .step-body{background:rgba(255,255,255,.02);border:1px solid rgba(198,153,46,.16);
+    border-radius:10px;padding:30px 32px;min-height:120px}
+  .step-body h3{font-size:1.4rem;color:var(--gold-soft);margin-bottom:8px}
+  .step-body p{color:#CBD4DD;margin:0}
+  .step-body .sys{font-family:"JetBrains Mono",monospace;font-size:.74rem;color:#8A98A6;margin-top:14px}
+
+  /* ---- work / omnisolutions ---- */
+  .work{position:relative;overflow:hidden}
+  .work::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(100% 90% at 15% 110%,rgba(198,153,46,.12),transparent 60%)}
+  .work .panel{position:relative;background:var(--navy-2);border:1px solid var(--line);
+    border-radius:14px;padding:48px 44px}
+  .work h2{font-size:clamp(1.9rem,3.6vw,2.7rem);max-width:640px}
+  .work .lede{color:#CBD4DD;max-width:560px;margin-top:18px}
+  .offers{display:flex;gap:24px;flex-wrap:wrap;margin:30px 0 34px}
+  .offer{font-size:.9rem;color:#C3CDD7;display:flex;gap:10px;align-items:center}
+  .offer::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+  /* ---- footer ---- */
+  footer{padding:48px 0;border-top:1px solid rgba(198,153,46,.16);color:#8A98A6;font-size:.85rem}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  footer .fchip{font-family:"JetBrains Mono",monospace;letter-spacing:.22em;color:var(--gold-soft);
+    text-transform:uppercase;font-size:.74rem}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .btn:hover,.vcard:hover{transform:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brandmark">Philip <b>Anglade</b></div>
+    <nav class="navlinks">
+      <a href="#work">What I've built</a>
+      <a href="#lifecycle">How a system works</a>
+      <a href="#consulting">Work with me</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="tag reveal"><span class="dot"></span><span class="eyebrow">Philip Anglade · Miramar, FL</span></div>
+    <h1 class="reveal">I build systems<br>where <span class="accent">none exist.</span></h1>
+    <p class="lede reveal">Program and operations leader. Over the last decade I've turned ambiguous ideas into functioning platforms, operations, and teams — across digital education, international operations, financial technology, and community impact.</p>
+    <div class="reveal"><span class="chip">Build · Scale · Execute</span></div>
+    <div class="cta-row reveal">
+      <a class="btn primary" href="#work">See what I've built</a>
+      <a class="btn ghost" href="#consulting">Work with me</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="cell"><div class="verb">Built</div><div class="who">OmniFX</div><div class="what">Product, marketing, operations, revenue.</div></div>
+    <div class="cell"><div class="verb">Operated</div><div class="who">OmniVentures</div><div class="what">Logistics, vendors, customer experience.</div></div>
+    <div class="cell"><div class="verb">Scaled</div><div class="who">OmniPool</div><div class="what">Technology, automation, governance.</div></div>
+    <div class="cell"><div class="verb">Purpose</div><div class="who">OmniGiving</div><div class="what">Program design, partnerships, impact.</div></div>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">01 — Portfolio</span>
+      <h2>What people see, and what I actually built.</h2>
+    </div>
+    <p class="sec-sub reveal" style="margin-bottom:40px">Four ventures, one throughline: identify a complex problem, build the system that solves it, and coordinate the people and resources to make it run without me.</p>
+
+    <div class="ventures">
+
+      <article class="vcard reveal">
+        <div class="vtop">
+          <div><h3>OmniFX</h3><div class="role">Founder &amp; Managing Director</div></div>
+          <div class="role" style="color:#8A98A6">Digital education &amp; membership platform</div>
+        </div>
+        <div class="reframe">
+          <div class="col see"><div class="lbl">What people see</div><div class="txt">An online education platform.</div></div>
+          <div class="col built"><div class="lbl">What I built</div><div class="txt">A vertically integrated operating system — product, acquisition funnel, marketing automation, CRM, onboarding, analytics, and a distributed support team, from zero.</div></div>
+        </div>
+        <div class="metrics">
+          <span class="metric"><b>30,000+</b> users</span>
+          <span class="metric"><b>~$1.2M</b> cumulative sales</span>
+          <span class="metric"><b>$300K+</b> ad budget managed</span>
+          <span class="metric"><b>2,500+</b> customers</span>
+        </div>
+      </article>
+
+      <article class="vcard reveal">
+        <div class="vtop">
+          <div><h3>OmniVentures</h3><div class="role">Founder &amp; Director</div></div>
+          <div class="role" style="color:#8A98A6">International program operations</div>
+        </div>
+        <div class="reframe">
+          <div class="col see"><div class="lbl">What people see</div><div class="txt">A group travel company.</div></div>
+          <div class="col built"><div class="lbl">What I operated</div><div class="txt">A multi-year, multi-country program operation — vendor networks, logistics, risk management, payment systems, and luxury customer-experience design across four continents.</div></div>
+        </div>
+        <div class="metrics">
+          <span class="metric"><b>8</b> countries</span>
+          <span class="metric"><b>4</b> continents</span>
+          <span class="metric"><b>150+</b> travelers</span>
+          <span class="metric"><b>$571K+</b> revenue</span>
+        </div>
+      </article>
+
+      <article class="vcard reveal">
+        <div class="vtop">
+          <div><h3>OmniPool</h3><div class="role">Founder &amp; Product Owner</div></div>
+          <div class="role" style="color:#8A98A6">Technology-enabled operations platform</div>
+        </div>
+        <div class="reframe">
+          <div class="col see"><div class="lbl">What people see</div><div class="txt">An investment vehicle.</div></div>
+          <div class="col built"><div class="lbl">What I built</div><div class="txt">A custom technology platform — automated onboarding, identity and compliance integrations, blockchain-based infrastructure, and governance and process design, directed end to end.</div></div>
+        </div>
+        <div class="metrics">
+          <span class="metric"><b>Custom</b> platform architected</span>
+          <span class="metric"><b>Identity / compliance</b> integrations</span>
+          <span class="metric"><b>Payment</b> infrastructure</span>
+        </div>
+      </article>
+
+      <article class="vcard reveal">
+        <div class="vtop">
+          <div><h3>OmniGiving</h3><div class="role">Founder</div></div>
+          <div class="role" style="color:#8A98A6">Mission-driven literacy initiative</div>
+        </div>
+        <div class="reframe">
+          <div class="col see"><div class="lbl">What people see</div><div class="txt">A charity.</div></div>
+          <div class="col built"><div class="lbl">What I designed</div><div class="txt">A purpose-driven program — partnership development, program design, and distribution logistics for early-literacy materials, funded from venture profits.</div></div>
+        </div>
+        <div class="metrics">
+          <span class="metric"><b>BabyWordTime</b> early literacy</span>
+          <span class="metric"><b>Free</b> distribution to families</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="creds">
+  <div class="wrap">
+    <span class="label">Credentials</span>
+    <div class="items">
+      <div class="item"><span class="k">PMP</span><span class="s">Project Management Professional</span></div>
+      <div class="item"><span class="k">FL GC</span><span class="s">Florida General Contractor</span></div>
+      <div class="item"><span class="k">ICC</span><span class="s">Structural Inspector</span></div>
+      <div class="item"><span class="k">ICC</span><span class="s">Plans Examiner</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="lifecycle" id="lifecycle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="num">02 — Anatomy</span>
+      <h2>How a system I build actually runs.</h2>
+    </div>
+    <p class="sec-sub reveal" style="margin-bottom:34px">A walk through the customer lifecycle inside OmniFX — every stage powered by infrastructure built to run on its own.</p>
+
+    <div class="steps reveal" id="stepBtns"></div>
+    <div class="step-body reveal" id="stepBody"></div>
+  </div>
+</section>
+
+<section class="work" id="consulting">
+  <div class="wrap">
+    <div class="panel reveal">
+      <span class="eyebrow">Now — OmniSolutions</span>
+      <h2 style="margin-top:14px">Business systems consulting for owner-led companies.</h2>
+      <p class="lede">The same instinct that built four ventures, applied to yours: I help owners reclaim time, clarity, and control by turning the chaos of a growing business into systems that run without them in the room.</p>
+      <div class="offers">
+        <div class="offer">Fractional operations leadership</div>
+        <div class="offer">Process mapping &amp; improvement</div>
+        <div class="offer">AI &amp; automation</div>
+        <div class="offer">Revenue &amp; growth systems</div>
+      </div>
+      <a class="btn primary" href="mailto:hello@philipanglade.com">Start a conversation</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Philip Anglade</span>
+    <span class="fchip">Build · Scale · Execute</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // ---- lifecycle stepper ----
+  var stages = [
+    {t:"Discover", h:"A stranger finds the funnel",
+     p:"Paid acquisition and content pull a cold audience into a structured entry point — the top of a funnel I designed and optimized continuously.",
+     sys:"system: Meta Ads · landing pages · audience segmentation"},
+    {t:"Register", h:"Interest becomes a contact",
+     p:"A registration captures the lead and routes it into the CRM, where automated sequences begin nurturing without manual effort.",
+     sys:"system: CRM · marketing automation · email sequencing"},
+    {t:"Convert", h:"A webinar earns the sale",
+     p:"A live webinar pipeline carries registrants to a purchase decision — the conversion engine of the whole operation.",
+     sys:"system: webinar platform · conversion tracking · payment ops"},
+    {t:"Onboard", h:"A buyer becomes a member",
+     p:"Purchase triggers automated onboarding: account provisioning, course access, and a guided first experience, all hands-off.",
+     sys:"system: course platform · onboarding automation · access control"},
+    {t:"Engage", h:"A member stays and grows",
+     p:"Community engagement and a support team keep members active, with response protocols and SOPs that scale past any one person.",
+     sys:"system: community · support workflows · retention strategy"},
+    {t:"Measure", h:"The whole loop reports on itself",
+     p:"KPI dashboards track acquisition, conversion, retention, and ROI across the full lifecycle — so the system improves on evidence, not guesses.",
+     sys:"system: KPI dashboards · funnel analytics · ROI reporting"}
+  ];
+  var btns = document.getElementById('stepBtns');
+  var body = document.getElementById('stepBody');
+  function render(i){
+    body.innerHTML = '<h3>'+stages[i].h+'</h3><p>'+stages[i].p+'</p><div class="sys">'+stages[i].sys+'</div>';
+    Array.prototype.forEach.call(btns.children,function(b,j){
+      b.classList.toggle('active', j===i);
+    });
+  }
+  stages.forEach(function(s,i){
+    var b=document.createElement('button');
+    b.className='step-btn';
+    b.innerHTML='<span class="sn">0'+(i+1)+'</span><span class="st">'+s.t+'</span>';
+    b.addEventListener('click',function(){render(i)});
+    btns.appendChild(b);
+  });
+  render(0);
+
+  // ---- scroll reveal ----
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
+</body>
+</html>
